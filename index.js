@@ -17,6 +17,7 @@ const parsePages = function(catalog) {
           return;
         } else {
           lastThreadId = thread['no']
+          console.log('New thread found (id: ' + lastThreadId + ')')
           return reportNewThread(thread)
         }
       }
