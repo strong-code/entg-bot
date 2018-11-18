@@ -13,6 +13,7 @@ const parsePages = function(catalog) {
     _.each(pages['threads'], (thread) => {
       if (_.includes(thread['sub'], 'entg')) {
         if (thread['no'] === lastThreadId) {
+          console.log('No new thread found (current thread id: ' + lastThreadId + ')')
           return;
         } else {
           lastThreadId = thread['no']
