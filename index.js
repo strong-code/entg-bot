@@ -1,10 +1,10 @@
 const request = require('request')
 const _ = require('lodash')
-const Discord = require('discord')
-const hook = new Discord.WebhookClient('', '')
-const pollInterval = 1000 // 3 minutes
+const Discord = require('discord.js')
+const hook = new Discord.WebhookClient('513533752312463381', 'pp3YX_XIMDURNpTfyDGo9_58-p22aWvY5QWLU3JymBovS2G0GgTr-VZNxpy2En1ZPhJW')
+const pollInterval = 1000 * 60// check every 1 minute
 const apiEndpoint  = "https://a.4cdn.org/biz/catalog.json"
-let lastThreadId   = ''
+let lastThreadId   = '11780476'
 
 console.log('started')
 
@@ -24,10 +24,11 @@ const parsePages = function(catalog) {
 }
 
 const reportNewThread = function(thread) {
-  console.log('https://boards.4chan.org/biz/thread/' + thread['no'])
+  let url = 'https://boards.4chan.org/biz/thread/' + thread['no']
+  hook.send('@here ➡️ New /entg/ thread found: ' + url)
 }
 
-// setInterval(() => {
+setInterval(() => {
   request.get(apiEndpoint, (err, res, body) => {
     if (err) {
       console.log(err)
@@ -37,4 +38,4 @@ const reportNewThread = function(thread) {
     let catalog = JSON.parse(body)
     return parsePages(catalog)
   })
-// }, pollInterval)
+}, pollInterval)
